@@ -10,21 +10,21 @@ export async function signUpNewUser(
 
   await page.getByPlaceholder("Full Name").fill(name)
   await page.getByPlaceholder("Email").fill(email)
-  await page.getByPlaceholder("Password", { exact: true }).fill(password)
-  await page.getByPlaceholder("Confirm Password").fill(password)
-  await page.getByRole("button", { name: "Sign Up" }).click()
+  await page.getByPlaceholder("Mot de passe", { exact: true }).fill(password)
+  await page.getByPlaceholder("Confirmer votre mot de passe").fill(password)
+  await page.getByRole("button", { name: "S'inscrire" }).click()
   await page.goto("/login")
 }
 
 export async function logInUser(page: Page, email: string, password: string) {
   await page.goto("/login")
 
-  await page.getByPlaceholder("Email").fill(email)
-  await page.getByPlaceholder("Password", { exact: true }).fill(password)
-  await page.getByRole("button", { name: "Log In" }).click()
+  await page.getByPlaceholder("Adresse Mail").fill(email)
+  await page.getByPlaceholder("Mot de passe", { exact: true }).fill(password)
+  await page.getByRole("button", { name: "Connexion" }).click()
   await page.waitForURL("/")
   await expect(
-    page.getByText("Welcome back, nice to see you again!"),
+    page.getByText("Bienvenue "),
   ).toBeVisible()
 }
 
