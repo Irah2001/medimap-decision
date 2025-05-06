@@ -1,7 +1,7 @@
 import uuid
 
 from pydantic import EmailStr
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, SQLModel
 
 
 # Shared properties
@@ -43,7 +43,6 @@ class UpdatePassword(SQLModel):
 class User(UserBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
     hashed_password: str
-    items: list["Item"] = Relationship(back_populates="owner", cascade_delete=True)
 
 
 # Properties to return via API, id is always required
@@ -57,38 +56,30 @@ class UsersPublic(SQLModel):
 
 
 # Shared properties
-class ItemBase(SQLModel):
-    title: str = Field(min_length=1, max_length=255)
-    description: str | None = Field(default=None, max_length=255)
-
-
-# Properties to receive on item creation
-class ItemCreate(ItemBase):
-    pass
-
-
-# Properties to receive on item update
-class ItemUpdate(ItemBase):
-    title: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
+class CommuneBase(SQLModel):
+    nom: str = Field(max_length=255)
+    code_postal: int
+    densite_pop: float | None = None
+    place_camping_hotel: float | None = None
+    nombre_medecin: int | None = None
+    nombre_intervention: int | None = None
+    latitude: float
+    longitude: float
+    nombre_habitants: int | None = None
 
 
 # Database model, database table inferred from class name
-class Item(ItemBase, table=True):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    owner_id: uuid.UUID = Field(
-        foreign_key="user.id", nullable=False, ondelete="CASCADE"
-    )
-    owner: User | None = Relationship(back_populates="items")
+class Commune(CommuneBase, table=True):
+    code_insee: int = Field(primary_key=True)
 
 
 # Properties to return via API, id is always required
-class ItemPublic(ItemBase):
-    id: uuid.UUID
-    owner_id: uuid.UUID
+class CommunePublic(CommuneBase):
+    code_insee: int
 
 
-class ItemsPublic(SQLModel):
-    data: list[ItemPublic]
+class CommunesPublic(SQLModel):
+    data: list[CommunePublic]
     count: int
 
 
