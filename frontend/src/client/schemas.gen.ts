@@ -69,32 +69,6 @@ export const HTTPValidationErrorSchema = {
   title: "HTTPValidationError",
 } as const
 
-export const ItemCreateSchema = {
-  properties: {
-    title: {
-      type: "string",
-      maxLength: 255,
-      minLength: 1,
-      title: "Title",
-    },
-    description: {
-      anyOf: [
-        {
-          type: "string",
-          maxLength: 255,
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Description",
-    },
-  },
-  type: "object",
-  required: ["title"],
-  title: "ItemCreate",
-} as const
-
 export const ItemPublicSchema = {
   properties: {
     title: {
@@ -131,43 +105,11 @@ export const ItemPublicSchema = {
   title: "ItemPublic",
 } as const
 
-export const ItemUpdateSchema = {
-  properties: {
-    title: {
-      anyOf: [
-        {
-          type: "string",
-          maxLength: 255,
-          minLength: 1,
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Title",
-    },
-    description: {
-      anyOf: [
-        {
-          type: "string",
-          maxLength: 255,
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Description",
-    },
-  },
-  type: "object",
-  title: "ItemUpdate",
-} as const
-
-export const ItemsPublicSchema = {
+export const CommunesPublicSchema = {
   properties: {
     data: {
-      items: {
-        $ref: "#/components/schemas/ItemPublic",
+      communes: {
+        $ref: "#/components/schemas/CommunePublic",
       },
       type: "array",
       title: "Data",
@@ -179,7 +121,7 @@ export const ItemsPublicSchema = {
   },
   type: "object",
   required: ["data", "count"],
-  title: "ItemsPublic",
+  title: "CommunesPublic",
 } as const
 
 export const MessageSchema = {

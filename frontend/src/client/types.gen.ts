@@ -13,24 +13,30 @@ export type HTTPValidationError = {
   detail?: Array<ValidationError>
 }
 
-export type ItemCreate = {
+export type CommuneCreate = {
   title: string
   description?: string | null
 }
 
-export type ItemPublic = {
-  title: string
-  description?: string | null
-  id: string
-  owner_id: string
+export type CommunePublic = {
+  code_insee: number
+  nom: string
+  code_postal: number
+  densite_pop?: number | null
+  place_camping_hotel?: number | null
+  nombre_medecin?: number | null
+  nombre_intervention?: number | null
+  latitude: number
+  longitude: number
+  nombre_habitants: number | null
 }
 
-export type ItemsPublic = {
-  data: Array<ItemPublic>
+export type CommunesPublic = {
+  data: Array<CommunePublic>
   count: number
 }
 
-export type ItemUpdate = {
+export type CommuneUpdate = {
   title?: string | null
   description?: string | null
 }
@@ -107,37 +113,18 @@ export type ValidationError = {
   type: string
 }
 
-export type ItemsReadItemsData = {
+export type CommunesReadCommunesData = {
   limit?: number
   skip?: number
 }
 
-export type ItemsReadItemsResponse = ItemsPublic
+export type CommunesReadCommunesResponse = CommunesPublic
 
-export type ItemsCreateItemData = {
-  requestBody: ItemCreate
-}
-
-export type ItemsCreateItemResponse = ItemPublic
-
-export type ItemsReadItemData = {
+export type CommunesReadCommuneData = {
   id: string
 }
 
-export type ItemsReadItemResponse = ItemPublic
-
-export type ItemsUpdateItemData = {
-  id: string
-  requestBody: ItemUpdate
-}
-
-export type ItemsUpdateItemResponse = ItemPublic
-
-export type ItemsDeleteItemData = {
-  id: string
-}
-
-export type ItemsDeleteItemResponse = Message
+export type CommunesReadCommuneResponse = CommunePublic
 
 export type LoginLoginAccessTokenData = {
   formData: Body_login_login_access_token
