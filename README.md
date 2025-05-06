@@ -33,17 +33,13 @@
 
 [![API docs](img/dashboard-create.png)]
 
-### Dashboard - Items
+### Dashboard - Communes
 
-[![API docs](img/dashboard-items.png)]
+[![API docs](img/dashboard-communes.png)]
 
 ### Dashboard - User Settings
 
 [![API docs](img/dashboard-user-settings.png)]
-
-### Dashboard - Dark Mode
-
-[![API docs](img/dashboard-dark.png)]
 
 ### Interactive API Documentation
 
@@ -136,3 +132,9 @@ Frontend docs: [frontend/README.md](./frontend/README.md).
 General development docs: [development.md](./development.md).
 
 This includes using Docker Compose, custom local domains, `.env` configurations, etc.
+
+## How to start project
+
+```bash
+docker compose up -d
+```
